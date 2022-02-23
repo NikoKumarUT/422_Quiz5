@@ -1,4 +1,3 @@
-/*
  * Phase A <studentA EID><studentB EID>
  * Phase B <studentB EID><studentA EID>
  */
@@ -30,4 +29,13 @@ public class PMapTest {
     }
 
     // TODO add more test cases to test all implemented methods
+    @Test
+    public void clearTest() {
+    	PMap m = new PMap();
+    	for(int i = 0; i < 30; i++) {
+    		m.put(i, i);
+    	}
+    	m.clear();
+    	assertEquals(null, m.get(0));
+    }
 }
