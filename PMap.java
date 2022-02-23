@@ -1,9 +1,11 @@
-/*
- * Phase A <studentA EID><studentB EID>
- * Phase B <studentB EID><studentA EID>
+ * Phase A <nak826><Nikolai Kumar>
+ * Phase B <tcc998><Tiani Chen-Troester>
+ * Phase C <sa53273><Suprita Ashok>
  */
 
 package pmap.phasea;
+
+import java.util.ArrayList;
 
 /**
  * PMap stands for Paired Map. A map is a collection of key-value
@@ -15,6 +17,7 @@ package pmap.phasea;
  */
 public class PMap {
 
+	ArrayList<PEntry> map = new ArrayList<PEntry>();
     /**
      * Returns the number of key-value mappings in this map.
      *
@@ -22,7 +25,7 @@ public class PMap {
      */
     public Integer size() {
         // TODO
-        return 0;
+    	return map.size();
     }
 
     /**
@@ -33,8 +36,10 @@ public class PMap {
      *         mappings
      */
     public boolean isEmpty() {
-        // TODO
-        return false;
+        if (map.size() == 0)
+        	return true;
+        else
+        	return false;
     }
 
     /**
@@ -47,6 +52,10 @@ public class PMap {
      */
     public boolean containsKey(Integer key) {
         // TODO
+    	for(int i = 0; i < map.size() ; i++) {
+    		if(map.get(i).getKey() == key)
+    			return true;
+    	}
         return false;
     }
 
@@ -60,6 +69,10 @@ public class PMap {
      */
     public boolean containsValue(Integer value) {
         // TODO
+    	for(int i = 0; i < map.size() ; i++) {
+    		if(map.get(i).getValue() == value)
+    			return true;
+    	}
         return false;
     }
 
@@ -74,7 +87,10 @@ public class PMap {
      */
     public Integer get(Integer key) {
         // TODO
-        return 0;
+        for(int i = 0; i < map.size() ; i++) {
+    		if(map.get(i).getKey() == key)
+    			return map.get(i).getValue();
+    	} return -1;
     }
 
     /**
@@ -91,8 +107,20 @@ public class PMap {
      */
     public Integer put(Integer key, Integer value) {
         // TODO
-        return 0;
-    }
+        PEntry temp = new PEntry(key, value);
+        int prev = 0;
+        for(int i = 0; i < map.size() ; i++) {
+    		if(map.get(i).getKey() == key) {
+    			prev = map.get(i).getValue();
+    			map.get(i).setValue(value);
+    		}
+	
+    	}
+        if(prev == 0) {
+        	map.add(temp);
+        	return null;
+        } return prev;
+    }	
 
     /**
      * Removes the mapping for a key from this map if it is present
@@ -111,7 +139,16 @@ public class PMap {
      */
     public Integer remove(Integer key) {
         // TODO
-        return 0;
+    	int temp;
+    	for(int i = 0; i < map.size() ; i++) {
+    		
+    		if(map.get(i).getKey() == key) {
+    			temp  = map.get(i).getValue();
+    			map.remove(i);
+    			return temp;
+    		}
+    	}
+        return null;
     }
 
     /**
@@ -124,6 +161,10 @@ public class PMap {
      */
     public void putAll(Integer[] keys, Integer[] values) {
         // TODO
+    	for(int i = 0; i < keys.length; i++) {
+    		PEntry p = new PEntry(keys[i], values[i]);
+    		map.add(p);
+    	}
     }
 
     /**
@@ -131,7 +172,10 @@ public class PMap {
      * empty after this call returns.
      */
     public void clear() {
-        // TODO
+    	int i = 0;
+        while(map.size() > 0) {
+        	map.remove(i);
+        }
     }
 
     /**
@@ -141,7 +185,11 @@ public class PMap {
      */
     public Integer[] keySet() {
         // TODO
-        return null;
+        Integer[] keys = new Integer[map.size()];
+        for(int i = 0; i < map.size(); i++) {
+        	keys[i] = map.get(i).getKey();
+        }
+        return keys;
     }
 
     /**
@@ -151,7 +199,11 @@ public class PMap {
      */
     public Integer[] values() {
         // TODO
-        return null;
+        Integer[] values = new Integer[map.size()];
+        for(int i = 0; i < map.size(); i++) {
+        	values[i] = map.get(i).getValue();
+        }
+        return values;
     }
 
     /**
@@ -161,6 +213,10 @@ public class PMap {
      */
     public PEntry[] entrySet() {
         // TODO
-        return null;
+        PEntry[] pSet = new PEntry[map.size()];
+        for(int i = 0; i < map.size(); i++) {
+        	pSet[i] = map.get(i);
+        }
+        return pSet;
     }
 }
